@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import Container from "../components/container";
 import MoreStories from "../components/more-stories";
 import HeroPost from "../components/hero-post";
@@ -30,6 +32,7 @@ export default function Index({ allPosts: { edges }, preview }) {
           />
         )}
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        <SpeedInsights />
       </Container>
     </Layout>
   );

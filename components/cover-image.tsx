@@ -17,6 +17,7 @@ export default function CoverImage({ title, coverImage, slug }: Props) {
     <Image
       width={2000}
       height={1000}
+      loading="eager"
       alt={`Cover Image for ${title}`}
       src={coverImage?.node.sourceUrl}
       className={cn("shadow-small", {

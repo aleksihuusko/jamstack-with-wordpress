@@ -14,4 +14,28 @@ module.exports = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        // This sets caching headers for all static files in the /_next/static/ directory
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        // This sets caching headers for images
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
 };

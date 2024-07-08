@@ -9,7 +9,7 @@ export default function Intro() {
           JAMStack
         </Link>
       </h1>
-      <p className="text-center md:text-left text-lg mt-5 md:pl-8">
+      <h2 className="text-center md:text-left text-lg mt-5 md:pl-8">
         A statically generated blog example using{" "}
         <Link
           target="_blank"
@@ -33,7 +33,7 @@ export default function Intro() {
         >
           All posts.
         </Link>
-      </p>
+      </h2>
     </section>
   );
 }

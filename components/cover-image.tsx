@@ -18,7 +18,6 @@ export default function CoverImage({ title, coverImage, slug }: Props) {
       priority
       width={2000}
       height={1000}
-      loading="eager"
       alt={`Cover Image for ${title}`}
       src={coverImage?.node.sourceUrl}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

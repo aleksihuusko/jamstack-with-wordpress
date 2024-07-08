@@ -7,7 +7,6 @@ import Container from "../../components/container";
 import { getAllPosts } from "../../lib/api";
 import { CMS_NAME, CMS_URL } from "../../lib/constants";
 import PostPreview from "../../components/post-preview";
-import Link from "next/link";
 import Intro from "../../components/intro";
 
 export default function Posts({ initialPosts, preview }) {

@@ -1,14 +1,14 @@
-const API_URL = process.env.WORDPRESS_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
 
 async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
   const headers = { "Content-Type": "application/json" };
 
   if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
-    headers["Authorization"] =
-      `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
+    headers[
+      "Authorization"
+    ] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
   }
 
-  // WPGraphQL Plugin must be enabled
   const res = await fetch(API_URL, {
     headers,
     method: "POST",
@@ -38,7 +38,7 @@ export async function getPreviewPost(id, idType = "DATABASE_ID") {
     }`,
     {
       variables: { id, idType },
-    },
+    }
   );
   return data.post;
 }
@@ -94,8 +94,53 @@ export async function getAllPostsForHome(preview) {
         onlyEnabled: !preview,
         preview,
       },
-    },
+    }
   );
+
+  return data?.posts;
+}
+
+export async function getAllPosts(preview, after = null, first = 9) {
+  const query = `
+    query AllPosts($after: String, $first: Int!) {
+      posts(after: $after, first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+        edges {
+          node {
+            title
+            excerpt
+            slug
+            date
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            author {
+              node {
+                name
+                firstName
+                lastName
+                avatar {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    after,
+    first,
+  };
+
+  const data = await fetchAPI(query, { variables });
 
   return data?.posts;
 }
@@ -189,7 +234,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         id: isDraft ? postPreview.id : slug,
         idType: isDraft ? "DATABASE_ID" : "SLUG",
       },
-    },
+    }
   );
 
   // Draft posts may not have an slug

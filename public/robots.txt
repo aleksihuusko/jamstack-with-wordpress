@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://jamstack.aleksihuusko.com
+
+# Sitemaps
+Sitemap: https://jamstack.aleksihuusko.com/sitemap.xml
